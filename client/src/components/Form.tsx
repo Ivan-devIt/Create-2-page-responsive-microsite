@@ -73,7 +73,7 @@ const Form: FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    Axios.post(config.url, { ...formData })
+    Axios.post(`${config.url}/contact`, { ...formData })
       .then((res) => {
         console.log(formData);
         navigate(Routers.THANKS);
