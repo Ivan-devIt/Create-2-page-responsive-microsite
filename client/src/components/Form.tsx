@@ -73,12 +73,14 @@ const Form: FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    Axios.post(config.url, formData).then((res) => {
-      console.log(formData);
-      navigate(Routers.THANKS);
-    });
-
-    // navigate(Routers.THANKS);
+    Axios.post(config.url, { ...formData })
+      .then((res) => {
+        console.log(formData);
+        navigate(Routers.THANKS);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
