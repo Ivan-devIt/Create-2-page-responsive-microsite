@@ -10,6 +10,18 @@ Client run on port 3000
 
 Database mongoDB
 
+## .env files in server look like this::
+
+PORT= \*
+
+DATABASE_URL= \*
+
+CLIENT_URL= \*
+
+## .env files in client look like this::
+
+REACT_APP_SERVER_URL= \*
+
 # Open terminal in initial folder
 
 # Follow to folder client
@@ -47,15 +59,3 @@ npm install
 ```
 npm run dev
 ```
-
-## .env files in server look like this::
-
-PORT= \*
-
-DATABASE_URL= \*
-
-CLIENT_URL= \*
-
-## .env files in client look like this::
-
-REACT_APP_SERVER_URL= \*
