@@ -3,9 +3,9 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import config from "./config/";
 import { router } from "./routers";
-import mongoose from "mongoose";
+import { connectDb } from "./connectDb";
 
-const { PORT, DATABASE_URL, CLIENT_URL } = config;
+const { PORT, CLIENT_URL } = config;
 const app: Express = express();
 
 app.use(
@@ -18,15 +18,6 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api", router);
-
-export const connectDb = async () => {
-  try {
-    await mongoose.connect(DATABASE_URL);
-    console.log("connected to database");
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 const start = async () => {
   try {

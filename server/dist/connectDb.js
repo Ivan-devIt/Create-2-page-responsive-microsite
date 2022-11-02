@@ -12,31 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
-const body_parser_1 = __importDefault(require("body-parser"));
+exports.connectDb = void 0;
+const mongoose_1 = __importDefault(require("mongoose"));
 const config_1 = __importDefault(require("./config/"));
-const routers_1 = require("./routers");
-const connectDb_1 = require("./connectDb");
-const { PORT, CLIENT_URL } = config_1.default;
-const app = (0, express_1.default)();
-app.use((0, cors_1.default)({
-    credentials: true,
-    origin: CLIENT_URL,
-}));
-app.use(body_parser_1.default.urlencoded({ extended: false }));
-app.use(body_parser_1.default.json());
-app.use("/api", routers_1.router);
-const start = () => __awaiter(void 0, void 0, void 0, function* () {
+const { DATABASE_URL } = config_1.default;
+const connectDb = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        (0, connectDb_1.connectDb)();
-        app.listen(PORT, () => {
-            console.log(`⚡️[server]: Server is  running at http://localhost:${PORT}`);
-        });
+        yield mongoose_1.default.connect(DATABASE_URL);
+        console.log("connected to database");
     }
     catch (error) {
         console.log(error);
     }
 });
-start();
-//# sourceMappingURL=index.js.map
+exports.connectDb = connectDb;
+//# sourceMappingURL=connectDb.js.map
