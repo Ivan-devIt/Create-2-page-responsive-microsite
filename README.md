@@ -8,6 +8,8 @@ Server run on port 5000
 
 Client run on port 3000
 
+Database mongoDB
+
 # Open terminal in initial folder
 
 # Follow to folder client

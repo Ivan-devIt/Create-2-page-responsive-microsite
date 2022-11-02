@@ -75,11 +75,10 @@ const Form: FC = () => {
 
     Axios.post(`${config.url}/contact`, { ...formData })
       .then((res) => {
-        console.log(formData);
         navigate(Routers.THANKS);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 

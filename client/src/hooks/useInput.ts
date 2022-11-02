@@ -2,7 +2,10 @@ import { useState } from "react";
 import { IValidations } from "../types";
 import { useValidation } from "./useValidation";
 
-export const useInput = (initialValue: any, validations: IValidations) => {
+export const useInput = (
+  initialValue: string | number,
+  validations: IValidations
+) => {
   const [value, setValue] = useState<string | number>(initialValue);
   const [isDirty, setDirty] = useState<boolean>(false);
   const valid = useValidation(value, validations);
