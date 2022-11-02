@@ -19,11 +19,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api", router);
 
+export const connectDb = async () => {
+  try {
+    await mongoose.connect(DATABASE_URL);
+    console.log("connected to database");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const start = async () => {
   try {
-    mongoose.connect(DATABASE_URL, {}, () => {
-      console.log("connected to database");
-    });
+    connectDb();
 
     app.listen(PORT, () => {
       console.log(

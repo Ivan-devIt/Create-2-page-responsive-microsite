@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.connectDb = void 0;
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
@@ -27,11 +28,19 @@ app.use((0, cors_1.default)({
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(body_parser_1.default.json());
 app.use("/api", routers_1.router);
+const connectDb = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield mongoose_1.default.connect(DATABASE_URL);
+        console.log("connected to database");
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.connectDb = connectDb;
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        mongoose_1.default.connect(DATABASE_URL, {}, () => {
-            console.log("connected to database");
-        });
+        (0, exports.connectDb)();
         app.listen(PORT, () => {
             console.log(`⚡️[server]: Server is  running at http://localhost:${PORT}`);
         });
